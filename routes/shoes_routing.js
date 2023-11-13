@@ -42,27 +42,6 @@ module.exports = function (db) {
         });
     });
 
-    // Add item to cart
-    router.post('/api/v1/add_to_cart/:id', (request, response) => {
-        getShoeById(request.params.id, (error, record) => {
-            if (error)
-                throw error;
-            else
-                if (record.length > 0)
-                    response.json({
-                                    item: {
-                                        "shoes_ID": record[0].shoes_ID,
-                                        "shoes_image_path": record[0].shoes_image_path,
-                                        "shoes_name": record[0].shoes_name,
-                                        "shoes_price": record[0].shoes_price,
-                                        "shoes_color": record[0].shoes_color,
-                                        "buy_quantity": 1,
-                    }});
-                else
-                    response.status(404).json({message: "Product not found"});
-        })
-    });
-
     // Add a product into database
     router.post('/api/v1/products', (request, response) => {
         const insert_values = request.body;
