@@ -14,7 +14,6 @@ app.use(helmet({
         directives: {
             defaultSrc: ["'self'"],
             connectSrc: ["'self'", process.env.BACKEND_URL],
-            // Khai báo các chỉ thị khác nếu cần
         },
     },
 }));
