@@ -1,11 +1,23 @@
 const express = require('express');
 const mysql = require('mysql2');
-const cors = require('cors')
+const cors = require('cors');
+const helmet = require('helmet');
+
 const productRoutes = require('./routes/shoes_routing');
 
-require('dotenv').config()
-const app = express()
-app.use(cors())
+require('dotenv').config();
+const app = express();
+app.use(cors());
+
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            connectSrc: ["'self'", process.env.BACKEND_URL],
+            // Khai báo các chỉ thị khác nếu cần
+        },
+    },
+}));
 
 const db = mysql.createConnection(
     {
