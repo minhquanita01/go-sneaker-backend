@@ -7,12 +7,12 @@ module.exports = function (db) {
     router.use(bodyParser.json());
 
     function getAllShoes(callback) {
-        const query = 'SELECT shoes_ID, shoes_image_path, shoes_name, shoes_description, shoes_price, shoes_color FROM go_shoes WHERE shoes_quantity > 0';
+        const query = 'SELECT shoes_ID, shoes_image_path, shoes_name, shoes_description, shoes_price, shoes_color FROM GO_Shoes WHERE shoes_quantity > 0';
         db.query(query, callback);
     }
 
     function getShoeById(shoeId, callback) {
-        const query = 'SELECT shoes_ID, shoes_image_path, shoes_name, shoes_description, shoes_price, shoes_color FROM go_shoes WHERE shoes_ID = ?';
+        const query = 'SELECT shoes_ID, shoes_image_path, shoes_name, shoes_description, shoes_price, shoes_color FROM GO_Shoes WHERE shoes_ID = ?';
         db.query(query, [shoeId], callback);
     }
 
@@ -46,7 +46,7 @@ module.exports = function (db) {
     router.post('/api/v1/products', (request, response) => {
         const insert_values = request.body;
         console.log(insert_values);
-        const query = 'INSERT INTO go_shoes SET ?';
+        const query = 'INSERT INTO GO_Shoes SET ?';
         db.query(query, [insert_values], (error, result) => {
             if (error)
                 throw error;
@@ -59,7 +59,7 @@ module.exports = function (db) {
     router.put('/api/v1/products/:id', (request, response) => {
         const shoeId = request.params.id;
         const updateFeild = request.body;
-        const query = 'UPDATE go_shoes SET ? WHERE shoes_ID = ?';
+        const query = 'UPDATE GO_Shoes SET ? WHERE shoes_ID = ?';
         db.query(query, [updateFeild, shoeId], (error, result) => {
             if (error)
                 throw error;
@@ -70,7 +70,7 @@ module.exports = function (db) {
 
     // Delete a product by id
     router.delete('/api/v1/products/:id', (request, response) => {
-        const query = 'DELETE FROM go_shoes WHERE shoes_ID = ?';
+        const query = 'DELETE FROM GO_Shoes WHERE shoes_ID = ?';
         db.query(query, [request.params.id], (error, result) => {
             if (error)
                 throw error;
